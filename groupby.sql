@@ -70,4 +70,14 @@ mysql> SELECT grade, AVG(marks)
 +-------+------------+
 2 rows in set (0.00 sec)
 
-mysql>
+mysql>  select grade , sum(marks) from student group by grade;
++-------+------------+
+| grade | sum(marks) |
++-------+------------+
+| A     |        355 |
+| B     |        151 |
+| C     |        126 |
+| D     |         55 |
+| E     |         48 |
++-------+------------+
+5 rows in set (0.03 sec)
