@@ -132,4 +132,57 @@ mysql>
 -- 2. DELETE removes rows, not table structure
 -- 3. Use TRUNCATE to remove all records quickly
 
----
+
+========================================================================================
+truncate
+========================================================================================
+
+-- DDL command used to delete all rows from a table, but keep the table structure for future use.
+Syntax
+TRUNCATE TABLE table_name;
+
+| Feature                    | DELETE              | TRUNCATE       | DROP           |
+| -------------------------- | ------------------- | -------------- | -------------- |
+| Command type               | DML                 | DDL            | DDL            |
+| Removes data               | Yes (selected rows) | Yes (all rows) | Yes            |
+| Removes table structure    | No                  | No             | Yes            |
+| WHERE clause               | Allowed             | Not allowed    | Not applicable |
+| Speed                      | Slow                | Very fast      | Very fast      |
+| Rollback possible          | Yes                 | No             | No             |
+| Triggers fired             | Yes                 | No             | No             |
+| Auto-increment reset       | No                  | Yes            | Yes            |
+| Table exists after command | Yes                 | Yes            | No             |
+
+-- DELETE removes specific rows and can be rolled back.
+-- TRUNCATE removes all rows, cannot be rolled back, and resets auto-increment.
+-- DROP deletes the entire table including its structure.
+
+
+mysql> select*from customer;
++-------------+-------------------+-------------+-------------+--------+
+| customer_id | customer          | mode        | city        | amount |
++-------------+-------------------+-------------+-------------+--------+
+|         101 | Olivia Barrett    | Netbanking  | Portland    |   5000 |
+|         102 | Ethan Sinclair    | Credit Card | Miami       |   7000 |
+|         103 | Maya Hernandez    | Credit Card | Seattle     |   6500 |
+|         104 | Liam Donovan      | Netbanking  | Denver      |   8000 |
+|         105 | Sophia Nguyen     | Credit Card | New Orleans |   7200 |
+|         106 | Caleb Foster      | Debit Card  | Minneapolis |   6000 |
+|         107 | Ava Patel         | Debit Card  | Phoenix     |   5500 |
+|         108 | Lucas Carter      | Netbanking  | Boston      |   9000 |
+|         109 | Isabella Martinez | Netbanking  | Nashville   |   6200 |
+|         110 | Jackson Brooks    | Credit Card | Boston      |   7500 |
++-------------+-------------------+-------------+-------------+--------+
+10 rows in set (0.00 sec)
+
+
+
+Structure remains, data gone permanently.
+TRUNCATE TABLE customer;
+
+
+mysql> TRUNCATE TABLE customer;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from customer;
+Empty set (0.00 sec)
